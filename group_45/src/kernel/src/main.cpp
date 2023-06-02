@@ -1,6 +1,9 @@
 #include "system.h"
+#include "print.h"
 
-#define VGA_ADDRESS 0xB8000
+// VGA text mode buffer
+/*
+#define VGA_ADDRESS 0xB8000 
 
 void clearScreen()
 {
@@ -20,7 +23,7 @@ void write_string(const char *string )
         *video++ = 15;
     }
 }
-
+*/
 
 // Define entry point in asm to prevent C++ mangling
 extern "C"{

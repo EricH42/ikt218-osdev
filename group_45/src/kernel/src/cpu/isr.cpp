@@ -1,3 +1,5 @@
+/*#include "isr.h"
+
 void keyboard_isr(void)
 {
     // Read the data from the keyboard buffer
@@ -51,27 +53,25 @@ void mouse_isr(void)
     notify_os_mouse_event();
 }
 
-void network_isr(void)
+void storage_isr(void)
 {
-    // Read the packet data from the NIC buffer
-    unsigned char* packet_data = read_packet_data_from_nic();
-    
-    // Check for any errors in the packet data
-    if (check_packet_errors(packet_data) == PACKET_ERROR) {
+    // Check for errors in the data
+    if (check_storage_errors() == STORAGE_ERROR) {
         return;
     }
     
-    // Determine the type of network protocol used
-    int protocol_type = get_protocol_type(packet_data);
+    // Determine the type of storage device and operation
+    int device_type = get_storage_device_type();
+    int operation_type = get_storage_operation_type();
     
-    // Route the packet to the appropriate network stack
-    if (protocol_type == TCP_PROTOCOL) {
-        route_tcp_packet_to_stack(packet_data);
+    // Transfer the data to the appropriate memory location
+    if (operation_type == STORAGE_READ) {
+        read_data_from_storage(device_type);
     }
-    else if (protocol_type == UDP_PROTOCOL) {
-        route_udp_packet_to_stack(packet_data);
+    else if (operation_type == STORAGE_WRITE) {
+        // Perform write operation
     }
     
-    // Notify the operating system that a network packet has arrived
-    notify_os_packet_received();
-}
+    // Notify the operating system that the storage operation has completed
+    notify_os_storage_operation_complete();
+}*/
